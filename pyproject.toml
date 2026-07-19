@@ -1,0 +1,74 @@
+[project]
+name = "kwkit"
+version = "0.1.0"
+description = "Personal reusable toolbox for optics, Monte-Carlo and atmospheric science."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Kevin Walcarius", email = "kevin.walcarius@gmail.com" }]
+dependencies = ["numpy"]
+
+# Optional, domain-specific dependency groups. Keep the core install light:
+# a demo env pulls only what it asks for (e.g. `pip install kwkit[viz]`).
+[project.optional-dependencies]
+viz = ["matplotlib"]
+ml = ["torch"]
+big = ["dask"]
+all = ["kwkit[viz,ml,big]"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# --- pixi -------------------------------------------------------------------
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+kwkit = { path = ".", editable = true }
+
+# Dev/runtime env pinned to 3.12 (numpy's typed stubs need 3.12+ to type-check);
+# the library itself still targets 3.11+ (see requires-python and ruff target).
+[tool.pixi.dependencies]
+python = "3.12.*"
+numpy = "*"
+
+[tool.pixi.feature.dev.dependencies]
+ruff = "*"
+mypy = ">=1.5"
+pytest = "*"
+
+[tool.pixi.feature.dev.tasks]
+fmt = "ruff format ."
+fmt-check = "ruff format --check ."
+lint = "ruff check src tests"
+type-check = "mypy src"
+test = "pytest -q"
+all = { depends-on = ["fmt", "lint", "type-check", "test"] }
+
+# Optional pixi features mirroring the PyPI extras, so `pixi` envs stay modular
+# too. Heavy extras (ml/big) are left as PyPI-only to avoid bloating dev envs.
+[tool.pixi.feature.viz.dependencies]
+matplotlib = "*"
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+viz = { features = ["viz"], solve-group = "default" }
+full = { features = ["dev", "viz"], solve-group = "default" }
+
+# --- tooling ----------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+exclude = [".pixi"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+# Strictness to refine in a dedicated session.
+strict = false
+ignore_missing_imports = true

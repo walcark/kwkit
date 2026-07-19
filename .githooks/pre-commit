@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Pre-commit hook: run the deterministic pixi quality gates before a commit.
+# Non-mutating checks only (fmt-check, not fmt), so the hook never rewrites
+# staged files under you. Fix formatting with `pixi run fmt` then re-stage.
+#
+# Enabled via `git config core.hooksPath .githooks` (done at scaffold time).
+set -euo pipefail
+
+if ! command -v pixi >/dev/null 2>&1; then
+    echo "pre-commit: pixi not found on PATH, skipping checks." >&2
+    exit 0
+fi
+
+echo "pre-commit: format check..."
+pixi run -e dev fmt-check
+
+echo "pre-commit: lint..."
+pixi run -e dev lint
+
+echo "pre-commit: OK"
