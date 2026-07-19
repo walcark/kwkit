@@ -31,7 +31,28 @@ pip install "kwkit[viz]"    # add plotting (matplotlib)
 pip install "kwkit[all]"    # everything
 ```
 
-Optional extras: `viz` (matplotlib), `ml` (torch), `big` (dask).
+Optional extras: `viz` (matplotlib + scienceplots), `ml` (torch), `big` (dask).
+
+## Plotting (`viz`)
+
+Thin ergonomic layer over matplotlib and SciencePlots. Helpers take an optional
+`ax` and return it, nothing calls `show`/`savefig` behind your back (except the
+explicit `save`), and styling is scoped:
+
+```python
+from kwkit import viz
+
+with viz.style():                       # science + no-latex + personal overlay
+    fig, ax = viz.figure()
+    img = ax.imshow(field)
+    viz.colorbar(img, ax=ax, label="intensity")
+    viz.save(fig, "figure", formats=["png", "pdf"])
+```
+
+`viz.style(latex=True)` switches to LaTeX rendering; `viz.style("ieee")` stacks
+an extra SciencePlots preset. Personal rcParams live in
+`src/kwkit/viz/kwkit.mplstyle`, stacked last so they win. It ships empty on
+purpose: fill it one line at a time as recurring annoyances show up.
 
 ## Layout
 

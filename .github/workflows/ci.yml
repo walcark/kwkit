@@ -25,7 +25,9 @@ jobs:
       with:
         pixi-version: v0.70.1
         cache: true
-        environments: dev
+        environments: >-
+          dev
+          full
 
     - name: Format check
       run: pixi run -e dev fmt-check
@@ -33,8 +35,10 @@ jobs:
     - name: Lint
       run: pixi run -e dev lint
 
+    # Run in the full env so the viz extra (matplotlib, scienceplots) is
+    # actually exercised and reflected in coverage.
     - name: Test
-      run: pixi run -e dev test
+      run: pixi run -e full test
 
     - name: Type check with mypy
       run: pixi run -e dev type-check

@@ -264,6 +264,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-dateutil-2.9.0.post0-pyhe01879c_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-gil-3.12.13-hd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.12-8_cp312.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/scienceplots-2.2.2-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/six-1.17.0-pyhe01879c_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tomli-2.4.1-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.16.0-pyhcf101f3_0.conda
@@ -414,6 +415,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.3.2-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-dateutil-2.9.0.post0-pyhe01879c_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.12-8_cp312.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/scienceplots-2.2.2-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/six-1.17.0-pyhe01879c_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
       - pypi: .
@@ -2890,6 +2892,20 @@ packages:
   run_exports: {}
   size: 6958
   timestamp: 1752805918820
+- conda: https://conda.anaconda.org/conda-forge/noarch/scienceplots-2.2.2-pyhcf101f3_0.conda
+  sha256: 60a4c613c650b72e89809ad754140849ac33bd52469386004a4d6ef7916f54be
+  md5: abf3d4db7bad33189c17e45da08002b1
+  depends:
+  - python >=3.10
+  - matplotlib-base
+  - python
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/scienceplots?source=hash-mapping
+  run_exports: {}
+  size: 30132
+  timestamp: 1782223148747
 - conda: https://conda.anaconda.org/conda-forge/noarch/six-1.17.0-pyhe01879c_1.conda
   sha256: 458227f759d5e3fcec5d9b7acce54e10c9e1f4f4b7ec978f3bfd54ce4ee9853d
   md5: 3339e3b65d58accf4ca4fb8748ab16b3
@@ -2942,6 +2958,7 @@ packages:
   requires_dist:
   - numpy
   - matplotlib ; extra == 'viz'
+  - scienceplots ; extra == 'viz'
   - torch ; extra == 'ml'
   - dask ; extra == 'big'
   - kwkit[viz,ml,big] ; extra == 'all'

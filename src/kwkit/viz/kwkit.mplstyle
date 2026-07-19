@@ -1,0 +1,17 @@
+# kwkit personal matplotlib overlay.
+#
+# Stacked LAST by kwkit.viz.style(), on top of SciencePlots ("science" +
+# "no-latex"), so anything set here wins. Intentionally empty for now: fill it
+# at use, one line at a time, as recurring annoyances show up. No Python needed,
+# just "key: value" entries (see the matplotlib rcParams reference).
+#
+# Examples to uncomment / adapt when you know what bothers you:
+#
+# figure.figsize: 4.0, 3.0
+# figure.dpi: 150
+# savefig.dpi: 300
+# font.family: sans-serif
+# font.size: 10
+# axes.grid: True
+# grid.alpha: 0.3
+# legend.frameon: False

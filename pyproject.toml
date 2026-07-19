@@ -11,7 +11,7 @@ dependencies = ["numpy"]
 # Optional, domain-specific dependency groups. Keep the core install light:
 # a demo env pulls only what it asks for (e.g. `pip install kwkit[viz]`).
 [project.optional-dependencies]
-viz = ["matplotlib"]
+viz = ["matplotlib", "scienceplots"]
 ml = ["torch"]
 big = ["dask"]
 all = ["kwkit[viz,ml,big]"]
@@ -52,6 +52,7 @@ all = { depends-on = ["fmt", "lint", "type-check", "test"] }
 # too. Heavy extras (ml/big) are left as PyPI-only to avoid bloating dev envs.
 [tool.pixi.feature.viz.dependencies]
 matplotlib = "*"
+scienceplots = "*"
 
 [tool.pixi.environments]
 default = { solve-group = "default" }
